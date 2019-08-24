@@ -18,6 +18,11 @@ var MAX_SPEED = 10
 const ACCEL = 10
 const DEACCEL = 10
 
+func _ready():
+	$Body/Head/Second_Camera_Image.size = get_viewport().size
+	$Mask.region_rect.size = get_viewport().size
+	$Mask.offset = get_viewport().size / 2
+
 func _physics_process(delta):
 	if !isFlying:
 		walk(delta)
@@ -110,6 +115,7 @@ func camera_moved():
 	emit_signal("Camer_Moved",$Body/Head.transform * $Body/Head/Camera.transform,$Body/Head/Camera.global_transform.origin)
 
 func _input(event):
+	$Body/Head/Second_Camera_Image.input(event)
 	if event is InputEventMouseMotion:
 		$Body/Head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
 

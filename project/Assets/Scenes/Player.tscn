@@ -6,6 +6,9 @@
 
 [sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("Body/Head/Second_Camera_Image")
+[sub_resource type="CylinderShape" id=2]
+radius = 0.0798632
+height = 3.13475
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -37,3 +40,8 @@ shape = SubResource( 1 )
 texture = SubResource( 2 )
 offset = Vector2( 512, 300 )
 region_rect = Rect2( 0, 0, 1040, 600 )
+[node name="TeleportationArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="TeleportationArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56095, 0 )
+shape = SubResource( 2 )

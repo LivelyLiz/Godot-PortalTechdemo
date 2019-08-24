@@ -1,6 +1,7 @@
 extends KinematicBody
 
 signal Camer_Moved(transform, position)
+export(TextureArray) var bla 
 
 var camera_angle = 0
 var mouse_sens = 0.3
@@ -17,6 +18,12 @@ var gravity = -9.8 * 3
 var MAX_SPEED = 10
 const ACCEL = 10
 const DEACCEL = 10
+
+func _ready():
+	$Body/Head/Second_Camera_Image.size = get_viewport().size
+	$Sprite.region_rect.size = get_viewport().size
+	$Sprite.offset = get_viewport().size / 2
+	bla = [null, null]
 
 func _physics_process(delta):
 	if !isFlying:
@@ -110,6 +117,7 @@ func camera_moved():
 	emit_signal("Camer_Moved",$Body/Head.transform * $Body/Head/Camera.transform,$Body/Head/Camera.global_transform.origin)
 
 func _input(event):
+	$Body/Head/Second_Camera_Image.input(event)
 	if event is InputEventMouseMotion:
 		$Body/Head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
 

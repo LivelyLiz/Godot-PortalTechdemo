@@ -1,38 +1,34 @@
 extends Spatial
 
-export(NodePath) var node = null setget set_node_path
+class_name TeleportTestPlane
+
 var _exit_portal : Spatial = null
 
-export(float) var teleportationDist = 0.001
+export(float) var teleportationDist = 0.1
+
+var index : int = -1 setget setIndex, getIndex
 
 var _player : Spatial = null
 var _portalShape : BoxShape = null
 var _prev_locPlayerPos : Vector3 = Vector3()
 
-func set_node_path(path):
-	node = path
-	if is_inside_tree():
-		_update_node_field()
-
-func _update_node_field():
-	if node != null:
-		var n = get_node(node)
-		if (n is Spatial):
-			_exit_portal = n
-		else:
-			print("Error: the node must be Spatial!")
-			node = null
-	else:
-		_exit_portal = null
-
-
 func _ready():
-	_update_node_field()
 	find_player()
 	if(_player == null):
 		print("No player")
 		set_physics_process(false)
 	find_shape()
+
+func setIndex(newValue : int):
+	index = newValue
+	
+	var m : SpatialMaterial = SpatialMaterial.new()
+	m.albedo_color = Color(index/255.0, 0, 0, 1)
+	m.flags_unshaded = true
+	$MeshInstance.set_surface_material(0, m)
+
+func getIndex():
+	return index
 
 #find the player in the scene
 func find_player():

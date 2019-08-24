@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "TeleportTestPlane",
+"language": "GDScript",
+"path": "res://Assets/Scenes/TeleportTestPlane.gd"
+} ]
 _global_script_class_icons={
-
+"TeleportTestPlane": ""
 }
 
 [application]
@@ -18,10 +23,6 @@ _global_script_class_icons={
 config/name="WieUnangenehm"
 run/main_scene="res://Assets/Scenes/TeleportTest.tscn"
 config/icon="res://icon.png"
-
-[display]
-
-window/vsync/use_vsync=false
 
 [rendering]
 

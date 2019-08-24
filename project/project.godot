@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "TeleportTestPlane",
 "language": "GDScript",
-"path": "res://Assets/Scenes/TeleportTestPlane.gd"
+"path": "res://Assets/Scripts/TeleportTestPlane.gd"
 } ]
 _global_script_class_icons={
 "TeleportTestPlane": ""

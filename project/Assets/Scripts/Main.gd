@@ -10,9 +10,14 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
-	print($Player_Viewport/Player.bla[0])
-	$Screen.material.set_shader_param("mask", $Player_Viewport/Player/Sprite.texture)
-	$Screen.material.set_shader_param("blending", $Rendering_Test/Sprite.texture)
+	$Screen.material.set_shader_param("mask", $Player_Viewport/Player/Mask.texture)
+	var count : int = $Portal_Planes.get_child_count()
+	for i in range(count):
+		if i > 18:
+			break
+		var node = $Portal_Planes.get_child(i)
+		$Screen.material.set_shader_param("blending"+str(i), node.get_node("Sprite").texture)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(event):
@@ -22,4 +27,4 @@ func _input(event):
 			get_tree().quit()
 
 func _on_Player_Camer_Moved(camera_transform, position):
-	$Rendering_Test.Update_Cameras(camera_transform, position)
+	pass

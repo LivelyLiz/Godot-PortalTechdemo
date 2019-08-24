@@ -1,7 +1,6 @@
 extends KinematicBody
 
 signal Camer_Moved(transform, position)
-export(TextureArray) var bla 
 
 var camera_angle = 0
 var mouse_sens = 0.3
@@ -21,9 +20,8 @@ const DEACCEL = 10
 
 func _ready():
 	$Body/Head/Second_Camera_Image.size = get_viewport().size
-	$Sprite.region_rect.size = get_viewport().size
-	$Sprite.offset = get_viewport().size / 2
-	bla = [null, null]
+	$Mask.region_rect.size = get_viewport().size
+	$Mask.offset = get_viewport().size / 2
 
 func _physics_process(delta):
 	if !isFlying:

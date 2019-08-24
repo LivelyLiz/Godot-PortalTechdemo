@@ -1,5 +1,7 @@
 extends KinematicBody
 
+signal Camer_Moved(transform, position)
+
 var camera_angle = 0
 var mouse_sens = 0.3
 var velocity = Vector3()
@@ -80,6 +82,7 @@ func walk(delta):
 	velocity.z = temp_velocity.z
 
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+	camera_moved()
 
 func fly(delta):
 	direction = Vector3()
@@ -101,6 +104,10 @@ func fly(delta):
 	velocity = temp_velocity
 
 	velocity = move_and_slide(velocity)
+	camera_moved()
+
+func camera_moved():
+	emit_signal("Camer_Moved",$Body/Head.transform * $Body/Head/Camera.transform,$Body/Head/Camera.global_transform.origin)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -110,3 +117,4 @@ func _input(event):
 		if change + camera_angle < 90 && change + camera_angle > -90:
 			$Body/Head/Camera.rotate_x(deg2rad(change))
 			camera_angle += change
+		camera_moved()

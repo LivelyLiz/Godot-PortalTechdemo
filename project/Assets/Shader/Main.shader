@@ -24,61 +24,66 @@ void fragment() {
 	vec4 mask_c = texture(mask, UV);
 	vec4 screen_color = texture(TEXTURE, UV);
 
+	if(mask_c.a < 1.0/255.0 || length(mask_c-screen_color) > 0.0001){
+		COLOR = screen_color;
+	}else{
+
 	vec4 color = screen_color;
-	if (mask_c.r < 2.0/256.0 && mask_c.r > 0.0 && length(mask_c-screen_color) <= 0.0001){
+	if (mask_c.r < 2.0/255.0 && mask_c.r > 0.0){
 		color = texture(blending1, UV);
 	}
-	if (mask_c.r == 2.0 && mask_c.rgb-color.rgb == vec3(0.0)){
+	if (mask_c.r < 3.0/255.0 && mask_c.r > 1.0/255.0){
 		color = texture(blending2, UV);
 	}
-	if (mask_c.r == 3.0){
-		color += mask_c.a*texture(blending3, UV);
+	if (mask_c.r < (3.0+1.0)/255.0 && mask_c.r > (3.0-1.0)/255.0){
+		color = texture(blending3, UV);
 	}
-	if (mask_c.r == 4.0){
-		color += mask_c.a*texture(blending4, UV);
+	if (mask_c.r < (4.0+1.0)/255.0 && mask_c.r > (4.0-1.0)/255.0){
+		color = texture(blending4, UV);
 	}
-	if (mask_c.r == 5.0){
-		color += mask_c.a*texture(blending5, UV);
+	if (mask_c.r < (5.0+1.0)/255.0 && mask_c.r > (5.0-1.0)/255.0){
+		color = texture(blending5, UV);
 	}
-	if (mask_c.r == 6.0){
-		color += mask_c.a*texture(blending6, UV);
+	if (mask_c.r < (6.0+1.0)/255.0 && mask_c.r > (6.0-1.0)/255.0){
+		color = texture(blending6, UV);
 	}
-	if (mask_c.r == 7.0){
-		color += mask_c.a*texture(blending7, UV);
+	if (mask_c.r < (7.0+1.0)/255.0 && mask_c.r > (7.0-1.0)/255.0){
+		color = texture(blending7, UV);
 	}
-	if (mask_c.r == 8.0){
-		color += mask_c.a*texture(blending8, UV);
+	if (mask_c.r < (8.0+1.0)/255.0 && mask_c.r > (8.0-1.0)/255.0){
+		color = texture(blending8, UV);
 	}
-	if (mask_c.r == 9.0){
-		color += mask_c.a*texture(blending9, UV);
+	if (mask_c.r < (9.0+1.0)/255.0 && mask_c.r > (9.0-1.0)/255.0){
+		color = texture(blending9, UV);
 	}
-	if (mask_c.r == 10.0){
-		color += mask_c.a*texture(blending10, UV);
+	if (mask_c.r < (10.0+1.0)/255.0 && mask_c.r > (10.0-1.0)/255.0){
+		color = texture(blending10, UV);
 	}
-	if (mask_c.r == 11.0){
-		color += mask_c.a*texture(blending11, UV);
+	if (mask_c.r < (11.0+1.0)/255.0 && mask_c.r > (11.0-1.0)/255.0){
+		color = texture(blending11, UV);
 	}
-	if (mask_c.r == 12.0){
-		color += mask_c.a*texture(blending12, UV);
+	if (mask_c.r < (12.0+1.0)/255.0 && mask_c.r > (12.0-1.0)/255.0){
+		color = texture(blending12, UV);
 	}
-	if (mask_c.r == 13.0){
-		color += mask_c.a*texture(blending13, UV);
+	if (mask_c.r < (13.0+1.0)/255.0 && mask_c.r > (13.0-1.0)/255.0){
+		color = texture(blending13, UV);
 	}
-	if (mask_c.r == 14.0){
-		color += mask_c.a*texture(blending14, UV);
+	if (mask_c.r < (14.0+1.0)/255.0 && mask_c.r > (14.0-1.0)/255.0){
+		color = texture(blending14, UV);
 	}
-	if (mask_c.r == 15.0){
-		color += mask_c.a*texture(blending15, UV);
+	if (mask_c.r < (15.0+1.0)/255.0 && mask_c.r > (15.0-1.0)/255.0){
+		color = texture(blending15, UV);
 	}
-	if (mask_c.r == 16.0){
-		color += mask_c.a*texture(blending16, UV);
+	if (mask_c.r < (16.0+1.0)/255.0 && mask_c.r > (16.0-1.0)/255.0){
+		color = texture(blending16, UV);
 	}
-	if (mask_c.r == 17.0){
-		color += mask_c.a*texture(blending17, UV);
+	if (mask_c.r < (17.0+1.0)/255.0 && mask_c.r > (17.0-1.0)/255.0){
+		color = texture(blending17, UV);
 	}
-	if (mask_c.r == 18.0){
-		color += mask_c.a*texture(blending18, UV);
+	if (mask_c.r < (18.0+1.0)/255.0 && mask_c.r > (18.0-1.0)/255.0){
+		color = texture(blending18, UV);
+	}
+	COLOR = color;
 	}
 
-	COLOR = color;
 }

@@ -26,8 +26,12 @@ func setIndex(newValue : int):
 	m.albedo_color = Color(index/255.0, 0, 0, 1)
 	m.flags_unshaded = true
 	$Plane.set_surface_material(0, m)
-	$Plane.layers = pow(2, index+1)
 	
+	var layer : int = pow(2, index+1)
+	$Plane.layers = layer
+	
+	for node in $ProxyGeometry.get_children():
+		node.layers = ~(layer+3)
 	
 
 func getIndex():

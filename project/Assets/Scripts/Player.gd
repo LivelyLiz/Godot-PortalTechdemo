@@ -7,11 +7,6 @@ var mouse_sens = 0.3
 var velocity = Vector3()
 var direction = Vector3()
 
-# Fly variables
-var FLY_SPEED = 40
-const FLY_ACCEL = 4
-var isFlying : bool = false
-
 # Walk variables
 var gravity = -9.8 * 3
 var MAX_SPEED = 10
@@ -28,36 +23,7 @@ func _ready():
 	$Player_View.offset = size/2
 
 func _physics_process(delta):
-	if !isFlying:
-		walk(delta)
-		if Input.is_action_just_pressed("FlyCheat"):
-			isFlying = true
-			fly(delta)
-		if Input.is_action_just_pressed("sub"):
-			if MAX_SPEED == 1:
-				return
-			MAX_SPEED -= 1
-		if Input.is_action_just_pressed("add"):
-			if MAX_SPEED == 40:
-				return
-			MAX_SPEED += 1
-		if Input.is_action_just_pressed("reset_speed"):
-			MAX_SPEED = 10
-	else:
-		fly(delta)
-		if Input.is_action_just_pressed("FlyCheat"):
-			isFlying = false
-			walk(delta)
-		if Input.is_action_just_pressed("sub"):
-			if FLY_SPEED == 1:
-				return
-			FLY_SPEED -= 1
-		if Input.is_action_just_pressed("add"):
-			if FLY_SPEED == 40:
-				return
-			FLY_SPEED += 1
-		if Input.is_action_just_pressed("reset_speed"):
-			FLY_SPEED = 10
+	walk(delta)
 
 func walk(delta):
 	direction = Vector3()
@@ -73,7 +39,7 @@ func walk(delta):
 		direction += aim.x
 
 	direction = direction.normalized()
-	velocity.y += gravity * delta
+	#velocity.y += gravity * delta
 
 	var temp_velocity = velocity
 	temp_velocity.y = 0
@@ -93,28 +59,6 @@ func walk(delta):
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
 	camera_moved()
 
-func fly(delta):
-	direction = Vector3()
-
-	var aim = $Body/Head/Camera.global_transform.basis
-	if Input.is_key_pressed(KEY_W):
-		direction -= aim.z
-	if Input.is_key_pressed(KEY_S):
-		direction += aim.z
-	if Input.is_key_pressed(KEY_A):
-		direction -= aim.x
-	if Input.is_key_pressed(KEY_D):
-		direction += aim.x
-
-	direction = direction.normalized()
-	var target = direction * FLY_SPEED
-	var temp_velocity = velocity
-	temp_velocity = temp_velocity.linear_interpolate(target, FLY_ACCEL * delta)
-	velocity = temp_velocity
-
-	velocity = move_and_slide(velocity)
-	camera_moved()
-
 func camera_moved():
 	emit_signal("Camer_Moved",$Body/Head/Camera)
 
@@ -123,7 +67,8 @@ func _input(event):
 	$Body.input(event)
 	if event is InputEventMouseMotion:
 		$Body/Head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
-
+		#rotate_y(deg2rad(-event.relative.x * mouse_sens))
+		
 		var change = -event.relative.y * mouse_sens
 		if change + camera_angle < 90 && change + camera_angle > -90:
 			$Body/Head/Camera.rotate_x(deg2rad(change))

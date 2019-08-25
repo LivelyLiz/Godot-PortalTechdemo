@@ -50,7 +50,7 @@ Portal1_Index = 1
 Portal2_Index = 2
 
 [node name="Portal1" parent="Portal_Planes/PortalPairs" instance=ExtResource( 5 )]
-transform = Transform( -8.74228e-08, 0, -1, 0, 2, 0, 2, 0, -4.37114e-08, 3.35918, 0, -6.493 )
+transform = Transform( 0.0524334, 0, -0.999656, -1.99925, 0.0160742, -0.0262159, 0.0160686, 1.99994, 0.000210706, 3.35918, 4.17197, -9.39157 )
 
 [node name="Portal2" parent="Portal_Planes/PortalPairs" instance=ExtResource( 5 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 4.94463 )

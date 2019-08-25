@@ -1,6 +1,6 @@
 extends KinematicBody
 
-signal Camer_Moved(transform, position)
+signal Camer_Moved(camera)
 
 var camera_angle = 0
 var mouse_sens = 0.3
@@ -116,7 +116,7 @@ func fly(delta):
 	camera_moved()
 
 func camera_moved():
-	emit_signal("Camer_Moved",$Body/Head.transform * $Body/Head/Camera.transform,$Body/Head/Camera.global_transform.origin)
+	emit_signal("Camer_Moved",$Body/Head/Camera)
 
 func _input(event):
 	$Body/Head/Second_Camera_Image.input(event)

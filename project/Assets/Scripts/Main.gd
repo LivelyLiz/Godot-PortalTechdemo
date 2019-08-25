@@ -36,6 +36,6 @@ func _input(event):
 		if event.scancode == KEY_ESCAPE:
 			get_tree().quit()
 
-func _on_Player_Camer_Moved(camera_transform, position):
+func _on_Player_Camer_Moved(camera):
 	for node in $Portal_Planes.get_children():
-		node.UpdateCamera(camera_transform, position)
+		node.UpdateCamera(camera)

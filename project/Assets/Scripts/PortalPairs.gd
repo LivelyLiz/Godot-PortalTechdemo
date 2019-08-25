@@ -38,14 +38,20 @@ func findPortals():
 	_portal1.index = Portal1_Index
 	_portal2.index = Portal2_Index
 
-func UpdateCamera(camera_transform, position):
+func UpdateCamera(camera):
+	var position = camera.global_transform.origin
+	var camera_transform = camera.global_transform
 	var plane1_pos = _portal1.to_local(position)
 	var plane2_pos = _portal2.to_local(position)
 	
-	_camera1.transform.basis = camera_transform.basis
-	_camera2.transform.basis = camera_transform.basis
-	_camera1.translation = plane2_pos
-	_camera2.translation = plane1_pos
+	var one_eighty_rotation = Quat(Vector3(0,1,0), PI)
+	var portal1_global_transform = _portal1.global_transform
+	var portal2_global_transform = _portal2.global_transform
+	
+	_camera1.transform.basis = portal2_global_transform.basis * Basis(one_eighty_rotation) * portal1_global_transform.basis.inverse() * camera_transform.basis
+	_camera2.transform.basis = portal1_global_transform.basis * Basis(one_eighty_rotation) * portal2_global_transform.basis.inverse() * camera_transform.basis
+	_camera1.translation = _portal2.to_global(one_eighty_rotation * plane1_pos)
+	_camera2.translation = _portal1.to_global(one_eighty_rotation * plane2_pos)
 
 
 

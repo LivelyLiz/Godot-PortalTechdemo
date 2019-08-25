@@ -18,6 +18,7 @@ render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="Portal1_VP"]
 cull_mask = 3
+current = true
 
 [node name="Portal2_VP" type="Viewport" parent="."]
 size = Vector2( 1024, 600 )
@@ -26,6 +27,7 @@ render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="Portal2_VP"]
 cull_mask = 3
+current = true
 
 [node name="Portal1_Sprite" type="Sprite" parent="."]
 texture = SubResource( 1 )

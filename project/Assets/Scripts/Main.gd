@@ -7,6 +7,8 @@ extends Spatial
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$Player_Viewport.size = get_viewport().size
+	$Portal_Planes.size = get_viewport().size
 	set_process(true)
 	
 func _process(delta):
@@ -20,7 +22,7 @@ func _process(delta):
 			var child = node.get_child(j)
 			if child is Sprite:
 				n = n + 1
-				$Screen.material.set_shader_param("blending"+str(i), child.texture)
+				$Screen.material.set_shader_param("blending"+str(n), child.texture)
 			if n == 18:
 				break
 		if n == 18:

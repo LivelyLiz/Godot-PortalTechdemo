@@ -29,8 +29,8 @@ func findPortals():
 	_camera1 = $Portal1_VP/Camera
 	_camera2 = $Portal2_VP/Camera
 	
-	_camera1.cull_mask += pow(2, Portal2_Index+1)
-	_camera2.cull_mask += pow(2, Portal1_Index+1)
+	#_camera1.cull_mask += pow(2, Portal2_Index+1)
+	#_camera2.cull_mask += pow(2, Portal1_Index+1)
 	
 	_portal1._exit_portal = _portal2
 	_portal2._exit_portal = _portal1

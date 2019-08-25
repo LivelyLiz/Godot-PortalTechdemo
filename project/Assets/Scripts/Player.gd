@@ -19,9 +19,13 @@ const ACCEL = 10
 const DEACCEL = 10
 
 func _ready():
-	$Body/Head/Second_Camera_Image.size = get_viewport().size
-	$Mask.region_rect.size = get_viewport().size
-	$Mask.offset = get_viewport().size / 2
+	var size = get_viewport().size
+	$Body/Head/Second_Camera_Image.size = size
+	$Mask.region_rect.size = size
+	$Mask.offset = size / 2
+	$Body.size = size
+	$Player_View.region_rect.size = size
+	$Player_View.offset = size/2
 
 func _physics_process(delta):
 	if !isFlying:
@@ -116,6 +120,7 @@ func camera_moved():
 
 func _input(event):
 	$Body/Head/Second_Camera_Image.input(event)
+	$Body.input(event)
 	if event is InputEventMouseMotion:
 		$Body/Head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
 

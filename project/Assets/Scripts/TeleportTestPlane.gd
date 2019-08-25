@@ -26,6 +26,8 @@ func setIndex(newValue : int):
 	m.albedo_color = Color(index/255.0, 0, 0, 1)
 	m.flags_unshaded = true
 	$MeshInstance.set_surface_material(0, m)
+	$MeshInstance.layers = pow(2, index+1)
+	print($MeshInstance.layers)
 
 func getIndex():
 	return index

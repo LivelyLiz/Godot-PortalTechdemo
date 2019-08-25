@@ -22,12 +22,13 @@ uniform sampler2D blending18;
 
 void fragment() {
 	vec4 mask_c = texture(mask, UV);
+	vec4 screen_color = texture(TEXTURE, UV);
 
-	vec4 color = (1.0-mask_c.a)*texture(TEXTURE, UV);
-	if (mask_c.r == 1.0){
+	vec4 color = (1.0-mask_c.a)*screen_color;
+	if (mask_c.r == 1.0/255.0 && mask_c.rgb-screen_color.rgb == vec3(0.0)){
 		color += mask_c.a*texture(blending1, UV);
 	}
-	if (mask_c.r == 2.0){
+	if (mask_c.r == 2.0/255.0 && mask_c.rgb-screen_color.rgb == vec3(0.0)){
 		color += mask_c.a*texture(blending2, UV);
 	}
 	if (mask_c.r == 3.0){

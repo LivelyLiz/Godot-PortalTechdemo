@@ -72,7 +72,7 @@ func canTeleport(pos : Vector3):
 #teleport player from this portal to the exit portal
 func teleport(targetObject : Spatial):
 	
-	var targetObjRot : Spatial = targetObject.find_node("Body").find_node("Head") #need head for rotation
+	var targetObjRot : Spatial = targetObject #need head for rotation
 	
 	#local position for this portal
 	var tO_this_locPos : Vector3 = to_local(targetObject.global_transform.origin)
@@ -87,9 +87,9 @@ func teleport(targetObject : Spatial):
 	if(targetObjRot.global_transform.basis.z.dot(global_transform.basis.x) < 0):
 		locRot = 2*PI - locRot
 	
-	var tO_this_locRot : Basis = Basis(Quat(Vector3(0, 1, 0), locRot))
+	var tO_this_locRot : Basis = global_transform.inverse().basis
 	var y180_rot : Basis = (Quat(Vector3(0,1,0), PI))
-	var newBasis : Basis = y180_rot * tO_this_locRot * _exit_portal.global_transform.basis
+	var newBasis : Basis = _exit_portal.global_transform.basis * y180_rot * global_transform.inverse().basis * targetObjRot.global_transform.basis #y180_rot * tO_this_locRot * _exit_portal.global_transform.basis
 	newBasis = newBasis.orthonormalized()
 	
 	targetObject.velocity = newBasis * targetObject.velocity #avoid the kinematic body to accidentally go back into the exit portal

@@ -66,8 +66,9 @@ func _input(event):
 	$Body/Head/Second_Camera_Image.input(event)
 	$Body.input(event)
 	if event is InputEventMouseMotion:
-		$Body/Head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
+		#Body/Head.rotate_y(deg2rad(-event.relative.x * mouse_sens))
 		#rotate_y(deg2rad(-event.relative.x * mouse_sens))
+		rotate_object_local(Vector3(0,1,0), deg2rad(-event.relative.x * mouse_sens))
 		
 		var change = -event.relative.y * mouse_sens
 		if change + camera_angle < 90 && change + camera_angle > -90:

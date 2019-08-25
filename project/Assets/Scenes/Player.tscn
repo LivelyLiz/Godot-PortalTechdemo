@@ -47,7 +47,6 @@ remote_path = NodePath("../../Second_Camera_Image/Camera")
 [node name="Body_Transform" type="RemoteTransform" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 remote_path = NodePath("../Body/Head")
-update_rotation = false
 
 [node name="Player_View" type="Sprite" parent="."]
 texture = SubResource( 3 )

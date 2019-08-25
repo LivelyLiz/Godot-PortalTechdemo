@@ -8,7 +8,7 @@ var velocity = Vector3()
 var direction = Vector3()
 
 # Walk variables
-var gravity = -9.8 * 3
+var gravity = -9.8
 var MAX_SPEED = 10
 const ACCEL = 10
 const DEACCEL = 10
@@ -38,11 +38,13 @@ func walk(delta):
 	if Input.is_action_pressed("ui_right"):
 		direction += aim.x
 
+	var up = global_transform.basis.y.normalized()
+
 	direction = direction.normalized()
-	#velocity.y += gravity * delta
+	velocity += gravity * delta * up
 
 	var temp_velocity = velocity
-	temp_velocity.y = 0
+	temp_velocity -= velocity.dot(up)*up
 
 	var speed = MAX_SPEED
 	var target = direction * speed
@@ -53,10 +55,9 @@ func walk(delta):
 		acceleration = DEACCEL
 
 	temp_velocity = temp_velocity.linear_interpolate(target, acceleration * delta)
-	velocity.x = temp_velocity.x
-	velocity.z = temp_velocity.z
-
-	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+	velocity = temp_velocity
+	
+	velocity = move_and_slide(velocity, global_transform.basis.y)
 	camera_moved()
 
 func camera_moved():
